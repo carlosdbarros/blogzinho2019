@@ -4,7 +4,28 @@
 {% block title %} - Home{% endblock title %}
 
 {% block main %}
-  <h1>
-    <p>hello world</p>
-  </h1>
+  <!-- search -->
+  <form class="form-inline my-2 my-lg-1">
+    <input
+      class="form-control mr-sm-2"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+      name='search'
+      value="{{search_term}}">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  <!-- end search -->
+
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ user.perfil.avatar.url }}">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">nome do dono do post vai aqui</a>
+        <small class="text-muted"> dados aqui </small>
+      </div>
+      <h2><a class="article-title" href="#"> mi amigos</a></h2>
+      <p class="article-content">Comentário brabor vai aqui</p>
+    </div>
+  </article>
 {% endblock main %}

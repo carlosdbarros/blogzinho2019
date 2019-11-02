@@ -16,9 +16,34 @@ from django.views.generic import (
 )
 
 from .forms import AuthRegisterForm
+from .models import Perfil, Publicacao
 
-class HomePageView(TemplateView):
+class HomePageView(ListView):
+    model = Publicacao
     template_name = 'blog/index.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        name_format = f"{request.user.first_name.upper() }"
+        name_format += request.user.last_name.upper()
+
+        obj, created = Perfil.objects.get_or_create(
+            user=self.request.user,
+                defaults={
+                    'user':request.user,
+                    'name':name_format
+                }
+            )
+
+        return super(
+            HomePageView, self).dispatch(request, *args, **kwargs)
+    
+    
+    # def get_context_data(self, **kwargs):
+
+
+    #     return super(
+    #         HomePageView, self).get_context_data(**kwargs)
+    
 
 
 class AuthRegisterView(FormView):

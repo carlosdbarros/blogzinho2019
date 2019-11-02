@@ -12,7 +12,7 @@ urlpatterns = [
         '',
         RedirectView.as_view(
             url=reverse_lazy(
-                'blog:login'
+                'blog:home'
             ),
             permanent=False
         ),
