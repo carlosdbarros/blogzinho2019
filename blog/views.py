@@ -34,6 +34,9 @@ class HomePageView(ListView):
                         'name':name_format
                     }
                 )
+            if obj.name == '':
+                obj.name = 'default username'
+                obj.save()
 
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
