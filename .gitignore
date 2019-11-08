@@ -132,3 +132,5 @@ node_modules/
 .vscode/
 .vscode/settings.json
 settings.json
+
+.vscode/launch.json
