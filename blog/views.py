@@ -36,14 +36,12 @@ class HomePageView(ListView):
 
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
-    
-    
-    # def get_context_data(self, **kwargs):
 
-
-    #     return super(
-    #         HomePageView, self).get_context_data(**kwargs)
-    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(
+            author__perfil__seguidores__in=[self.request.user.perfil]
+        ).distinct()
 
 
 class AuthRegisterView(FormView):
