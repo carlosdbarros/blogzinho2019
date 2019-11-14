@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Publicacao
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -16,3 +17,10 @@ class AuthRegisterForm(UserCreationForm):
             'username', 'email', 'first_name',
             'last_name', 'password1', 'password2'
         ]
+
+class PublicacaoForm(ModelForm):
+    
+    class Meta:
+        model = Publicacao
+        fields = ['author', 'text', 'created', 'updated']
+        success_url = '/blog'

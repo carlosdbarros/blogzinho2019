@@ -15,7 +15,7 @@ from django.views.generic import (
     UpdateView, DeleteView
 )
 
-from .forms import AuthRegisterForm
+from .forms import AuthRegisterForm, PublicacaoForm
 from .models import Perfil, Publicacao
 
 class HomePageView(ListView):
@@ -41,12 +41,10 @@ class HomePageView(ListView):
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
     
-    
-    # def get_context_data(self, **kwargs):
-
-
-    #     return super(
-    #         HomePageView, self).get_context_data(**kwargs)
+    class HomePageView(CreateView):
+         model = Publicacao
+         template_name = 'blog/index.html'
+         form_class = PublicacaoForm
     
 
 

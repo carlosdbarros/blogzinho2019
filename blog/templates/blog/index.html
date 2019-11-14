@@ -23,6 +23,15 @@
       <div class="article-metadata">
         <a class="mr-2" href="#">nome do dono do post vai aqui</a>
         <small class="text-muted"> dados aqui </small>
+        <ul>
+          {% for publicacao in object_list %}
+              <li>{{ publicacao }}</li>
+          {% empty %}
+              <li>No publicacao yet.</li>
+          {% endfor %}
+          </ul>
+          <br/>
+          <input type='submit' name='upload' value='Salvar'/>
       </div>
       <h2><a class="article-title" href="#"> mi amigos</a></h2>
       <p class="article-content">Comentário brabor vai aqui</p>
