@@ -130,7 +130,9 @@ node_modules/
 # vscode
 .vscode
 .vscode/
-.vscode/settings.json
-settings.json
 
+settings.json
+.vscode/settings.json
+
+launch.json
 .vscode/launch.json
