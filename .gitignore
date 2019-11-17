@@ -126,11 +126,3 @@ dmypy.json
 
 # NodeJs
 node_modules/
-
-# vscode
-.vscode
-.vscode/
-.vscode/settings.json
-settings.json
-
-.vscode/launch.json

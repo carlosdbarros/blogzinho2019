@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block titulo %} - Login{% endblock titulo %}
+
+{% block main %}
+	<div class="container">
+		<h1>Faça seu login</h1>
+		<form action="." method="POST"> {% csrf_token %}
+			{{ form.nom_field_errors }}
+
+			{{ form|crispy }}
+			
+			<button class="btn btn-outline-info" type="submit">Confirmar</button>
+		</form>
+	</div>
+{% endblock main %}
