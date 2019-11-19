@@ -17,6 +17,7 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
   <!-- end search -->
+<<<<<<< Updated upstream
   {% for publicacao in object_list %}
   <article class="media content-section">
     <img class="rounded-circle article-img" src="{{ user.perfil.avatar.url }}">
@@ -41,4 +42,37 @@
     {% empty %}
     <p>Nao tem nada bro</p>
     {% endfor %}
+=======
+  {% if user.is_authenticated %}
+  {% for publicacao in object_list reversed %}
+    {% for i in range(30) %}
+      <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ user.perfil.avatar.url }}">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#"> {{ user.perfil }} </a>
+            <small class="text-muted"> {{ publicacao.created }} </small>
+          </div>
+          <h2><a class="article-title" href="#"> {{ user.perfil.name }} </a></h2>
+          <p class="article-content"> {{ publicacao.text }} </p>
+          <div class="container">
+            <ul class="timeline">
+                <li>
+                    <a href="#">@{{ publicacao.autor }}</a>
+                    <a class="float-right">{{ publicacao.data }}</a>
+                    <p>{{ publicacao.texto }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+        {% empty %}
+        <p>Nao tem nada bro</p>
+    {% endfor %}
+  {% endfor %}
+    {% else %}
+      <a class="nav-item nav-link" href="{% url 'blog:login' %}">Login</a>
+      <a class="nav-item nav-link" href="{% url 'blog:register' %}">Register</a>
+    {% endif %}
+>>>>>>> Stashed changes
     {% endblock main %}

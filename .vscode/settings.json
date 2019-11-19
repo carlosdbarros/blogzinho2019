@@ -12,9 +12,13 @@
         "pylint_django",
     ],
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "python.pythonPath": "~/.pyenv/versions/3.7.4/envs/projects3.7/bin/python",
 =======
     "python.pythonPath": "C:\Users\Notebook\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Python 3.8\Python 3.8 (32-bit).lnk",
+>>>>>>> Stashed changes
+=======
+    "python.pythonPath": "C:\\Users\\Notebook\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
 >>>>>>> Stashed changes
     "python.autoComplete.extraPaths": [
         "${workspaceRoot}"
