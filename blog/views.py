@@ -23,16 +23,17 @@ class HomePageView(ListView):
     template_name = 'blog/index.html'
 
     def dispatch(self, request, *args, **kwargs):
-        name_format = f"{request.user.first_name.upper() }"
-        name_format += request.user.last_name.upper()
+       if request.user.is_authenticated:
+            name_format = f"{request.user.first_name.upper() }"
+            name_format += request.user.last_name.upper()
 
-        obj, created = Perfil.objects.get_or_create(
-            user=self.request.user,
-                defaults={
-                    'user':request.user,
-                    'name':name_format
-                }
-            )
+            obj, created = Perfil.objects.get_or_create(
+                        user=self.request.user,
+                            defaults={
+                                'user':request.user,
+                                'name':name_format
+                            }
+                        )
 
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
