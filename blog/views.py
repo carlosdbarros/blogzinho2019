@@ -23,27 +23,23 @@ class HomePageView(ListView):
     template_name = 'blog/index.html'
 
     def dispatch(self, request, *args, **kwargs):
-        name_format = f"{request.user.first_name.upper() }"
-        name_format += request.user.last_name.upper()
+        if request.user.is_authenticated:
+            name_format = f"{request.user.first_name.upper() }"
+            name_format += request.user.last_name.upper()
 
-        obj, created = Perfil.objects.get_or_create(
-            user=self.request.user,
-                defaults={
-                    'user':request.user,
-                    'name':name_format
-                }
-            )
+            obj, created = Perfil.objects.get_or_create(
+                user=self.request.user,
+                    defaults={
+                        'user':request.user,
+                        'name':(
+                            name_format if len(name_format) > 1 else request.user.username.upper()
+                        )
+                    }
+                )
 
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
-    
-    
-    # def get_context_data(self, **kwargs):
 
-
-    #     return super(
-    #         HomePageView, self).get_context_data(**kwargs)
-    
 
 
 class AuthRegisterView(FormView):
@@ -64,3 +60,7 @@ class AuthRegisterView(FormView):
 
     def get_success_url(self):
         return reverse(self.sucess_url)
+
+
+class PublicacaoDetailView(DetailView):
+    pass
