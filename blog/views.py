@@ -31,20 +31,15 @@ class HomePageView(ListView):
                 user=self.request.user,
                     defaults={
                         'user':request.user,
-                        'name':name_format
+                        'name':(
+                            name_format if len(name_format) > 1 else request.user.username.upper()
+                        )
                     }
                 )
 
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
-    
-    
-    # def get_context_data(self, **kwargs):
 
-
-    #     return super(
-    #         HomePageView, self).get_context_data(**kwargs)
-    
 
 
 class AuthRegisterView(FormView):
@@ -65,3 +60,9 @@ class AuthRegisterView(FormView):
 
     def get_success_url(self):
         return reverse(self.sucess_url)
+
+
+class PublicacaoDetailView(DetailView):
+    pass
+
+

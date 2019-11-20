@@ -3,9 +3,12 @@ from .models import Comentario, Perfil, Publicacao
 
 @admin.register(Publicacao)
 class PublicacaoAdmin(admin.ModelAdmin):
-    list_display= ['author','created', 'updated']
+    list_display= ['author','titulo', 'created', 'updated']
     readonly_fields = ['created','updated']
     search_fields = ['author__username']
+    prepopulated_fields = {
+        "slug": ("titulo",)
+    }
 
 
 @admin.register(Perfil)
