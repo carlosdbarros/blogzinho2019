@@ -43,9 +43,20 @@ class HomePageView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        return queryset.filter(
-            author__perfil__seguidores__in=[self.request.user.perfil]
-        ).distinct()
+        perfil = None
+
+        try:
+            perfil = self.request.user.perfil
+        except AttributeError:
+            pass
+
+        if perfil:
+            return queryset.filter(
+                Q(author__perfil__in=perfil.seguidores.all()) &
+                ~Q(author=perfil.user)
+            )
+
+        return Publicacao.objects.none()
 
 
 class AuthRegisterView(FormView):
