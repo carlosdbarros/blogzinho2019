@@ -1,7 +1,10 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path, re_path
 
-from .views import HomePageView, AuthRegisterView
+from .views import (
+    HomePageView, AuthRegisterView,
+    PublicacaoDetailView,
+)
 
 app_name='blog'
 
@@ -13,5 +16,10 @@ urlpatterns = [
 
     # blog
     path('', HomePageView.as_view(), name='home'),
+    path(
+        'publicacao/<slug:slug>/detail/',
+        PublicacaoDetailView.as_view(),
+        name='publicacao_detail'
+    )
 
 ]

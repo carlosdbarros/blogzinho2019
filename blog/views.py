@@ -29,12 +29,14 @@ class HomePageView(ListView):
             name_format += request.user.last_name.upper()
 
             obj, created = Perfil.objects.get_or_create(
-                    user=self.request.user,
-                        defaults={
-                            'user':request.user,
-                            'name':name_format
-                        }
-                    )
+                user=self.request.user,
+                    defaults={
+                        'user':request.user,
+                        'name':(
+                            name_format if len(name_format) > 1 else request.user.username.upper()
+                        )
+                    }
+                )
 
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
@@ -64,3 +66,7 @@ class AuthRegisterView(FormView):
 
     def get_success_url(self):
         return reverse(self.sucess_url)
+
+
+class PublicacaoDetailView(DetailView):
+    pass
