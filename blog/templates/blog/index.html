@@ -5,6 +5,7 @@
 
 {% block main %}
   <!-- search -->
+
   <form class="form-inline my-2 my-lg-1">
     <input
       class="form-control mr-sm-2"
@@ -16,16 +17,35 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
   <!-- end search -->
-
-  <article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ user.perfil.avatar.url }}">
-    <div class="media-body">
-      <div class="article-metadata">
-        <a class="mr-2" href="#">nome do dono do post vai aqui</a>
-        <small class="text-muted"> dados aqui </small>
-      </div>
-      <h2><a class="article-title" href="#"> mi amigos</a></h2>
-      <p class="article-content">Comentário brabor vai aqui</p>
-    </div>
-  </article>
-{% endblock main %}
+  {% if user.is_authenticated %}
+  {% for publicacao in object_list %}
+    {% if user != publicacao.author %}
+      <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ user.perfil.avatar.url }}">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#"> {{ publicacao.author.perfil.name }} </a>
+            <small class="text-muted"> {{ publicacao.created }} </small>
+          </div>
+          <h2><a class="article-title" href="#"> {{ publicacao.titulo }} </a></h2>
+          <p class="article-content"> {{ publicacao.text }} </p>
+          <div class="container">
+            <ul class="timeline">
+                <li>
+                    <a href="#">@{{ publicacao.author }}</a>
+                    <a class="float-right">{{ publicacao.data }}</a>
+                    <p>{{ publicacao.texto }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+    {% endif %}
+        {% empty %}
+        <p>Nao tem nada bro</p>
+  {% endfor %}
+    {% else %}
+      <a class="nav-item nav-link" href="{% url 'blog:login' %}">Login</a>
+      <a class="nav-item nav-link" href="{% url 'blog:register' %}">Register</a>
+    {% endif %}
+    {% endblock main %}

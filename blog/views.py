@@ -21,6 +21,7 @@ from .models import Perfil, Publicacao, Comentario
 class HomePageView(ListView):
     model = Publicacao
     template_name = 'blog/index.html'
+    ordering = ['created']
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -40,6 +41,11 @@ class HomePageView(ListView):
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(
+            author__perfil__seguidores__in=[self.request.user.perfil]
+        ).distinct()
 
 
 class AuthRegisterView(FormView):

@@ -25,7 +25,6 @@ class Perfil(models.Model):
     def __str__(self):
         str_format = self.name.upper()
         str_format += f", POSSUI {self.seguidores.count()} SEGUIDORES"
-    
         return str_format
 
 
