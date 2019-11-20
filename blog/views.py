@@ -64,3 +64,5 @@ class AuthRegisterView(FormView):
 
 class PublicacaoDetailView(DetailView):
     pass
+
+
