@@ -21,10 +21,12 @@
   {% for publicacao in object_list %}
     {% if user != publicacao.author %}
       <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ user.perfil.avatar.url }}">
+        <a href="{{ publicacao.author }}">
+          <img class="rounded-circle article-img" src="{{ user.perfil.avatar.url }}">
+        </a>
         <div class="media-body">
           <div class="article-metadata">
-            <a class="mr-2" href="#"> {{ publicacao.author.perfil.name }} </a>
+            <a href="#">@{{ publicacao.author }}</a>
             <small class="text-muted"> {{ publicacao.created }} </small>
           </div>
           <h2><a class="article-title" href="#"> {{ publicacao.titulo }} </a></h2>
@@ -32,7 +34,6 @@
           <div class="container">
             <ul class="timeline">
                 <li>
-                    <a href="#">@{{ publicacao.author }}</a>
                     <a class="float-right">{{ publicacao.data }}</a>
                     <p>{{ publicacao.texto }}</p>
                 </li>

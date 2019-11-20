@@ -54,7 +54,7 @@ class HomePageView(ListView):
             return queryset.filter(
                 Q(author__perfil__in=perfil.seguidores.all()) &
                 ~Q(author=perfil.user)
-            )
+            ).order_by('-created').distinct()
 
         return Publicacao.objects.none()
 
