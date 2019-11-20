@@ -21,6 +21,7 @@ from .models import Perfil, Publicacao
 class HomePageView(ListView):
     model = Publicacao
     template_name = 'blog/index.html'
+    ordering = ['created']
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
