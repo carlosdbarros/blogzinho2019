@@ -16,7 +16,7 @@ from django.views.generic import (
 )
 
 from .forms import AuthRegisterForm
-from .models import Perfil, Publicacao
+from .models import Perfil, Publicacao, Comentario
 
 class HomePageView(ListView):
     model = Publicacao
@@ -63,6 +63,6 @@ class AuthRegisterView(FormView):
 
 
 class PublicacaoDetailView(DetailView):
-    pass
+    model = Publicacao
 
 
