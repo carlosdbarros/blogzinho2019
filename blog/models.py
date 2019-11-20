@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 
 class Perfil(models.Model):
@@ -22,19 +23,21 @@ class Perfil(models.Model):
         verbose_name_plural = 'Perfis'
 
     def __str__(self):
-        str_formt = self.name.upper()
-        str_formt += f", POSSUI {self.seguidores.count()} SEGUIDORES"
+        str_format = self.name.upper()
+        str_format += f", POSSUI {self.seguidores.count()} SEGUIDORES"
     
-        return str_formt
+        return str_format
 
 
 class Publicacao(models.Model):
+    titulo = models.CharField("Título", max_length=100)
     author = models.ForeignKey(
         User,
         verbose_name="Autor",
         on_delete=models.PROTECT
     )
     text = models.TextField('Descrição')
+    slug = models.SlugField(max_length=100, unique=True, blank=True)
     created = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
 
@@ -42,11 +45,17 @@ class Publicacao(models.Model):
         verbose_name = 'Publicação'
         verbose_name_plural = 'Publicações'
 
-    def __str__(self):
-        str_formt = f"CRIADO EM {self.created.strftime('%d/%m/%Y')}, "
-        str_formt += f"POR {self.author.username}"
+    def save(self, *args, **kwargs):
+        if len(self.titulo) > 1:
+            self.slug = slugify(self.titulo)
 
-        return str_formt
+        super(Publicacao, self).save(*args, **kwargs)
+
+    def __str__(self):
+        str_format = f"CRIADO EM {self.created.strftime('%d/%m/%Y')}, "
+        str_format += f"POR {self.author.username}"
+
+        return str_format
 
 
 class Comentario(models.Model):
@@ -77,8 +86,8 @@ class Comentario(models.Model):
         verbose_name_plural = 'Comentários'
     
     def __str__(self):
-        str_formt = f"{self.created.strftime('%m/%d/%Y, %H:%M:%S')} - "
-        str_formt += f"COMETÁRIO FEITO POR: {self.author.username.upper()} - "
-        str_formt += 'POSSUI RESPOSTA' if self.resposta else 'NÂO POSSUI RESPOSTA'
+        str_format = f"{self.created.strftime('%m/%d/%Y, %H:%M:%S')} - "
+        str_format += f"COMETÁRIO FEITO POR: {self.author.username.upper()} - "
+        str_format += 'POSSUI RESPOSTA' if self.resposta else 'NÂO POSSUI RESPOSTA'
 
-        return str_formt
+        return str_format
