@@ -86,7 +86,7 @@ class PublicacaoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         kwargs.update({
             'comentarios':Comentario.objects.filter(
-                publicacao=self.get_object()
+                publicacao= reverse(self.get_object())
             )
         })
 
