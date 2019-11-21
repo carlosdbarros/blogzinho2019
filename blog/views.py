@@ -81,5 +81,13 @@ class AuthRegisterView(FormView):
 
 class PublicacaoDetailView(DetailView):
     model = Publicacao
+    template_name = 'blog/publicacao_detail.html'
 
+    def get_context_data(self, **kwargs):
+        kwargs.update({
+            'comentarios':Comentario.objects.filter(
+                publicacao=self.get_object()
+            )
+        })
 
+        return super().get_context_data(**kwargs)
