@@ -21,9 +21,17 @@ urlpatterns = [
     path(
         'blog/',
         include(
-            'blog.urls',
+            'blog.urls',                
             namespace='blog'
         ),
         name='blog'
-    )
+    ),
+      path(
+        '',
+        include(
+            'blog.urls',
+            namespace='publicacao'
+        ),
+        name='publicacao'
+    ),
 ]

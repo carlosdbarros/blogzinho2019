@@ -1,6 +1,6 @@
 import logging
 
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http.response import HttpResponse, HttpResponseRedirect
@@ -15,8 +15,9 @@ from django.views.generic import (
     UpdateView, DeleteView
 )
 
-from .forms import AuthRegisterForm, PublicacaoForm
+from .forms import AuthRegisterForm
 from .models import Perfil, Publicacao
+
 
 class HomePageView(ListView):
     model = Publicacao
@@ -40,13 +41,18 @@ class HomePageView(ListView):
 
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
-    
-    class HomePageView(CreateView):
-         model = Publicacao
-         template_name = 'blog/index.html'
-         form_class = PublicacaoForm
-    
 
+
+class PublicacaoView(CreateView):
+    model = Publicacao
+    fields = ['author', 'text']
+    template_name = 'blog/publicacao.html'
+    #success_url = ('blog/publicacao.html')
+    success_url = reverse_lazy("blog/publicacao.html")
+
+
+    def get_absolute_url(self):
+        return reverse('Publicacao', kwargs={'pk': self.pk, 'slug': self.slug })
 
 class AuthRegisterView(FormView):
     form_class = AuthRegisterForm
@@ -66,3 +72,4 @@ class AuthRegisterView(FormView):
 
     def get_success_url(self):
         return reverse(self.sucess_url)
+        

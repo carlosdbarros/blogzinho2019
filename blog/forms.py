@@ -18,9 +18,8 @@ class AuthRegisterForm(UserCreationForm):
             'last_name', 'password1', 'password2'
         ]
 
-class PublicacaoForm(ModelForm):
-    
+class PublicacaoForm(forms.ModelForm):
     class Meta:
         model = Publicacao
-        fields = ['author', 'text', 'created', 'updated']
-        success_url = '/blog'
+        exclude = ('created', 'updated')
+

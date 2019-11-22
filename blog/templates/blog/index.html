@@ -4,6 +4,7 @@
 {% block title %} - Home{% endblock title %}
 
 {% block main %}
+
   <!-- search -->
   <form class="form-inline my-2 my-lg-1">
     <input
@@ -16,23 +17,15 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form>
   <!-- end search -->
-
   <article class="media content-section">
     <img class="rounded-circle article-img" src="{{ user.perfil.avatar.url }}">
     <div class="media-body">
       <div class="article-metadata">
         <a class="mr-2" href="#">nome do dono do post vai aqui</a>
         <small class="text-muted"> dados aqui </small>
-        <ul>
-          {% for publicacao in object_list %}
-              <li>{{ publicacao }}</li>
-          {% empty %}
-              <li>No publicacao yet.</li>
-          {% endfor %}
-          </ul>
-          <br/>
-          <input type='submit' name='upload' value='Salvar'/>
       </div>
+      <h2><a class="article-title" href="publicacao"> Publicar</a></h2>
+
       <h2><a class="article-title" href="#"> mi amigos</a></h2>
       <p class="article-content">Comentário brabor vai aqui</p>
     </div>
