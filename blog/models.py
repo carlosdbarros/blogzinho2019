@@ -15,9 +15,14 @@ class Perfil(models.Model):
     )
     name = models.CharField("Nome completo", max_length=150)
     avatar = models.ImageField(default='profile_pics/default.png', upload_to='profile_pics')
+    # slug = models.SlugField(unique=True, max_length=150)
     created = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
 
+
+    # def save(self,commit=True, *args, **kwargs):
+    #     if len(self.name) > 1:
+            
     class Meta:
         verbose_name = 'Perfil'
         verbose_name_plural = 'Perfis'

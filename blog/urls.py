@@ -3,7 +3,7 @@ from django.urls import path, re_path
 
 from .views import (
     HomePageView, AuthRegisterView,
-    PublicacaoDetailView,
+    PublicacaoDetailView, PerfilView,
 )
 
 app_name='blog'
@@ -17,9 +17,16 @@ urlpatterns = [
     # blog
     path('', HomePageView.as_view(), name='home'),
     path(
-        'publicacao/<slug:slug>/detail/',
+        'publicacao/<int:pk>/detail/',
         PublicacaoDetailView.as_view(),
         name='publicacao_detail'
+    ),
+
+    # Perfil
+    path(
+        'perfil/<str:slug>',
+        PerfilView.as_view(),
+        name='perfil'
     )
 
 ]

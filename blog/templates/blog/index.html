@@ -26,7 +26,7 @@
         </a>
         <div class="media-body">
           <div class="article-metadata">
-            <a href="#">@{{ publicacao.author }}</a>
+            <a href="{% url 'blog:perfil' publicacao.author.username %}">@{{ publicacao.author }}</a>
             <small class="text-muted"> {{ publicacao.created }} </small>
           </div>
           <h2><a class="article-title" href="#"> {{ publicacao.titulo }} </a></h2>

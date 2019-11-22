@@ -16,6 +16,7 @@ from django.views.generic import (
 )
 
 from .forms import AuthRegisterForm
+from django.contrib.auth.models import User
 from .models import Perfil, Publicacao, Comentario
 
 class HomePageView(ListView):
@@ -96,8 +97,20 @@ class PublicacaoDetailView(DetailView):
 
 
 
-class PerfilListView(DetailView):
+class PerfilView(DetailView):
     model = Perfil
-    template_name = "blog/perfil_list.html"
+    slug_field = "user__username"
+    template_name = "blog/profile.html"
+
+    def get_context_data(self, **kwargs):
+        posts = Publicacao.objects.filter(
+            author=self.get_object().user
+        ).order_by('-created')
+
+        kwargs.update({
+            'posts':posts
+        })
+
+        return super(PerfilView, self).get_context_data(**kwargs)
 
 
