@@ -14,7 +14,7 @@ class Perfil(models.Model):
         blank=True,
     )
     name = models.CharField("Nome completo", max_length=150)
-    avatar = models.ImageField(default='profile01.svg', upload_to='profile_pics')
+    avatar = models.ImageField(default='profile_pics/default.png', upload_to='profile_pics')
     created = models.DateTimeField(verbose_name='Criado em', auto_now_add=True)
     updated = models.DateTimeField(verbose_name='Atualizado em', auto_now=True)
 

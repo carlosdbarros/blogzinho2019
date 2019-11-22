@@ -46,7 +46,9 @@
         <p>Nao tem nada bro</p>
   {% endfor %}
     {% else %}
+    <div>
       <a class="nav-item nav-link" href="{% url 'blog:login' %}">Login</a>
       <a class="nav-item nav-link" href="{% url 'blog:register' %}">Register</a>
+    </div>
     {% endif %}
     {% endblock main %}

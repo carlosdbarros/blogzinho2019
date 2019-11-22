@@ -1,6 +1,6 @@
 import logging
 
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http.response import HttpResponse, HttpResponseRedirect
@@ -37,6 +37,8 @@ class HomePageView(ListView):
                         )
                     }
                 )
+        else:
+            return HttpResponseRedirect(reverse_lazy('blog:login'))
 
         return super(
             HomePageView, self).dispatch(request, *args, **kwargs)
@@ -86,8 +88,16 @@ class PublicacaoDetailView(DetailView):
     def get_context_data(self, **kwargs):
         kwargs.update({
             'comentarios':Comentario.objects.filter(
-                publicacao= reverse(self.get_object())
+                publicacao= self.get_object()
             )
         })
 
         return super().get_context_data(**kwargs)
+
+
+
+class PerfilListView(DetailView):
+    model = Perfil
+    template_name = "blog/perfil_list.html"
+
+
