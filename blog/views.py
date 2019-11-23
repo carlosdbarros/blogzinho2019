@@ -48,7 +48,7 @@ class PublicacaoView(CreateView):
     fields = ['author', 'text']
     template_name = 'blog/publicacao.html'
     #success_url = ('blog/publicacao.html')
-    success_url = reverse_lazy("blog/publicacao.html")
+    success_url = reverse_lazy("blog:publicacao")
 
 
     def get_absolute_url(self):
